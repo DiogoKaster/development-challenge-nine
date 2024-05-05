@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../lib/axios";
+import { Trash, NotePencil } from "@phosphor-icons/react";
 
-export type Pacient = {
+export type PacientType = {
   id: number;
   name: string;
   cpf: string;
@@ -15,11 +16,28 @@ export type Pacient = {
 };
 
 export function PacientList() {
-  const [pacients, setPacients] = useState<Pacient[] | null>([]);
+  const [pacients, setPacients] = useState<PacientType[] | null>([]);
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const tokenWithoutQuotes = token ? token.replace(/^"(.*)"$/, "$1") : "";
+
+  async function handleDeletePacient(id: number) {
+    try {
+      await api.delete(`/pacients/${id}`, {
+        headers: {
+          Authorization: tokenWithoutQuotes,
+        },
+      });
+
+      const newPacients = pacients?.filter((pacient) => pacient.id !== id);
+      if (newPacients) {
+        setPacients(newPacients);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     const fetchPacients = async () => {
@@ -62,8 +80,12 @@ export function PacientList() {
               <td>{pacient.name}</td>
               <td>{pacient.birthDate}</td>
               <td>
-                <a>Editar</a>
-                <a>Excluir</a>
+                <button onClick={() => navigate(`/pacients/${pacient.id}`)}>
+                  <NotePencil size={27} />
+                </button>
+                <button onClick={() => handleDeletePacient(pacient.id)}>
+                  <Trash size={27} />
+                </button>
               </td>
             </tr>
           ))}

@@ -31,6 +31,19 @@ export const Container = styled.div`
     td {
       padding: 1.25rem 2rem;
       background-color: ${({ theme }) => theme["gray-700"]};
+
+      button {
+        color: ${({ theme }) => theme["blue-500"]};
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.8);
+        }
+      }
     }
   }
 `;
