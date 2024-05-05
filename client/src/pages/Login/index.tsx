@@ -4,6 +4,9 @@ import { Input } from "../../components/Input";
 import { Container, Form } from "./styles";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "../../lib/axios";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const loginFormSchema = z.object({
   email: z.string().email(),
@@ -21,10 +24,27 @@ export function Login() {
     resolver: zodResolver(loginFormSchema),
   });
 
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
   async function handleLogin(data: LoginFormInputs) {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(data);
+    try {
+      const response = await api.post("/auth/login", data);
+
+      const tokenJSON = JSON.stringify(response.data.token);
+      localStorage.setItem("token", tokenJSON);
+
+      navigate("/pacients");
+    } catch (error) {
+      console.error("Erro ao fazer a requisição:", error);
+    }
   }
+
+  useEffect(() => {
+    if (token) {
+      navigate("/pacients");
+    }
+  }, [token, navigate]);
 
   return (
     <Container>
