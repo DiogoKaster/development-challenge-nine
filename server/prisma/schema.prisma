@@ -23,3 +23,16 @@ model User {
 
   @@map ("users")
 }
+
+model Pacient {
+  id Int @id @default(autoincrement())
+  name String
+  cpf String
+  birthDate String
+  phone String
+  email String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map ("pacients")
+}
