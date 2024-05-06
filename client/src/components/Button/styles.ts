@@ -17,6 +17,7 @@ export const Container = styled.button`
 
   &:not(:disabled):hover {
     background-color: ${({ theme }) => theme["blue-300"]};
+    cursor: pointer;
   }
 
   p {
