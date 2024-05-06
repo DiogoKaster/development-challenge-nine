@@ -5,7 +5,7 @@ import { Container, Form } from "./styles";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "../../lib/axios";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const loginFormSchema = z.object({
@@ -64,6 +64,9 @@ export function Login() {
           {...register("password")}
           required
         />
+        <h4>
+          Não tem uma conta? <NavLink to="/signup">Registre-se</NavLink>
+        </h4>
         <Button text="Login" type="submit" disabled={isSubmitting} />
       </Form>
     </Container>

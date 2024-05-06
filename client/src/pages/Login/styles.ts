@@ -7,6 +7,16 @@ export const Container = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: ${({ theme }) => theme["gray-900"]};
+
+  h4 {
+    font-weight: 400;
+    margin: 0.5rem 0;
+
+    a {
+      color: ${({ theme }) => theme["blue-300"]};
+      text-decoration: none;
+    }
+  }
 `;
 
 export const Form = styled.form`
