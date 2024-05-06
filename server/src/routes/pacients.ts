@@ -13,7 +13,7 @@ const pacientRoutes: Router = Router();
 
 pacientRoutes.get("/", [authMiddleware], errorHandler(listPacients));
 pacientRoutes.post("/create", [authMiddleware], errorHandler(createPacient));
-pacientRoutes.put("/update/:id", [authMiddleware], errorHandler(updatePacient));
+pacientRoutes.put("/:id", [authMiddleware], errorHandler(updatePacient));
 pacientRoutes.delete("/:id", [authMiddleware], errorHandler(deletePacient));
 pacientRoutes.get("/:id", [authMiddleware], errorHandler(getPacientById));
 
