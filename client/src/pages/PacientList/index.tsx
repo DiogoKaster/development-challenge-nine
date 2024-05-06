@@ -3,6 +3,7 @@ import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../lib/axios";
 import { Trash, NotePencil } from "@phosphor-icons/react";
+import { Button } from "../../components/Button";
 
 export type PacientType = {
   id: number;
@@ -65,7 +66,12 @@ export function PacientList() {
   return (
     <Container>
       <h1>Lista de Pacientes</h1>
-
+      <div style={{ width: "100%", marginTop: "2rem" }}>
+        <Button
+          text="Criar Paciente"
+          onClick={() => navigate("/pacients/create")}
+        />
+      </div>
       <table>
         <thead>
           <tr>
