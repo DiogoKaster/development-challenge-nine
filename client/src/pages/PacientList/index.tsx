@@ -40,6 +40,11 @@ export function PacientList() {
     }
   }
 
+  async function handleLogout() {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
   useEffect(() => {
     const fetchPacients = async () => {
       try {
@@ -66,11 +71,19 @@ export function PacientList() {
   return (
     <Container>
       <h1>Lista de Pacientes</h1>
-      <div style={{ width: "100%", marginTop: "2rem" }}>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          marginTop: "2rem",
+          justifyContent: "space-between",
+        }}
+      >
         <Button
           text="Criar Paciente"
           onClick={() => navigate("/pacients/create")}
         />
+        <Button text="Logout" onClick={handleLogout} />
       </div>
       <table>
         <thead>
