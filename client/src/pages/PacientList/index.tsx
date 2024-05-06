@@ -10,6 +10,7 @@ export type PacientType = {
   name: string;
   cpf: string;
   birthDate: string;
+  address: string;
   phone: string;
   email: string;
   createdAt: string;

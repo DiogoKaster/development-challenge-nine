@@ -12,6 +12,7 @@ const UploadFormSchema = z.object({
   name: z.string().min(3),
   email: z.string().email(),
   phone: z.string().min(3),
+  address: z.string().min(3),
   birthDate: z.string(),
   cpf: z.string().min(3),
 });
@@ -62,6 +63,7 @@ export function Pacient() {
         setValue("cpf", response.data.cpf);
         setValue("phone", response.data.phone);
         setValue("birthDate", response.data.birthDate);
+        setValue("address", response.data.address);
       } catch (error) {
         console.error(error);
       }
@@ -88,6 +90,8 @@ export function Pacient() {
         <Input type="text" {...register("phone")} required />
         <h3>Data de nascimento:</h3>
         <Input type="text" {...register("birthDate")} required />
+        <h3>Endereço:</h3>
+        <Input type="text" {...register("address")} required />
         <Button text="Atualizar" type="submit" disabled={isSubmitting} />
       </Form>
     </Container>
