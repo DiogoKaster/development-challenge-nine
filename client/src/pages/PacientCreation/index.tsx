@@ -11,6 +11,7 @@ const CreatePacientFormSchema = z.object({
   name: z.string().min(3),
   email: z.string().email(),
   phone: z.string().min(3),
+  address: z.string().min(3),
   birthDate: z.string(),
   cpf: z.string().min(3),
 });
@@ -58,6 +59,8 @@ export function PacientCreation() {
         <Input type="text" {...register("phone")} required />
         <h3>Data de nascimento:</h3>
         <Input type="text" {...register("birthDate")} required />
+        <h3>Endereço:</h3>
+        <Input type="text" {...register("address")} required />
         <Button text="Criar" type="submit" disabled={isSubmitting} />
       </Form>
     </Container>
